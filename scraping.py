@@ -30,19 +30,13 @@ def download_img(url, file_name, folder_name):
     r = requests.get(url, stream=True)
     if r.status_code == 200:
         os.makedirs(os.path.join("./database", folder_name), exist_ok=True)
-        with open(os.path.join("./database","database.csv"), mode="a", encoding="utf-8") as f:
+        with open(os.path.join("./database","database.csv"), mode="a", encoding="utf-8", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow([os.path.join("./database", folder_name,file_name+".png")])
+            writer.writerow([os.path.join("./database", folder_name,file_name+".jpg")])
              
-        with open(os.path.join("./database", folder_name,file_name+".png"), 'wb') as f:
+        with open(os.path.join("./database", folder_name,file_name+".jpg"), 'wb') as f:
             r.raw.decode_content = True
             shutil.copyfileobj(r.raw, f)
-def code():
-    code = ""
-    for i in range(10):
-        code += random.choice("aaaaaaaaaaaa")
-    return code
-
 def search_google(num,data):
     # まず最上段の関数urlのlist取得
     # それをループさせてdownload_imgに入れる
@@ -52,10 +46,10 @@ def search_google(num,data):
     
     
 if __name__ == "__main__":
-    with open(os.path.join("./database","database.csv"), mode="w", encoding="utf-8") as f:
+    with open(os.path.join("./database","database.csv"), mode="w", encoding="utf-8", newline="") as f:
         pass
     num = 10
-    words = ["森","海","空","町","家族","加藤純一"]
+    words = ["森","海","空","町","犬","猫"]
     
     for word in words:
         search_google(num, word)
